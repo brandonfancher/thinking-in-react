@@ -4,11 +4,18 @@ import './styles/TodoList.css';
 
 class TodoList extends Component {
   render() {
-    const todos = this.props.todos;
+    const { filter, todos } = this.props;
 
     return (
       <div className="TodoList">
-        {todos.map((todo, index) => <Todo todo={todo} key={`todo-${index}`} />)}
+        {todos
+          .filter(todo => {
+            if (filter !== 'all') {
+              return todo.status === filter;
+            }
+            return todo;
+          })
+          .map((todo, index) => <Todo todo={todo} key={`todo-${index}`} />)}
       </div>
     );
   }

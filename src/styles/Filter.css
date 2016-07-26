@@ -1,4 +1,14 @@
 .Filter {
   border: 3px solid #F3F316;
   margin: 4px;
+  padding: 4px;
+}
+
+.Filter-active {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.Filter-inactive {
+  text-decoration: none;
 }

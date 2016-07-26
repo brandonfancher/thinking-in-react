@@ -8,6 +8,7 @@ import './styles/App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.setFilter = this.setFilter.bind(this);
     this.state = {
       todos: [
         { desc: 'Clean the garage', status: 'open' },
@@ -16,6 +17,10 @@ class App extends Component {
       ],
       filter: 'all', // open, all, or complete
     };
+  }
+
+  setFilter(filter) {
+    this.setState({ filter });
   }
 
   render() {
@@ -27,8 +32,8 @@ class App extends Component {
           <h2>Barebones Todo - Thinking in React</h2>
         </div>
         <AddTodo />
-        <TodoList todos={todos} />
-        <Filter filter={filter} />
+        <TodoList filter={filter} todos={todos} />
+        <Filter filter={filter} setFilter={this.setFilter} />
       </div>
     );
   }
