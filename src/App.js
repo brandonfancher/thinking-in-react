@@ -8,12 +8,14 @@ import './styles/App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.deleteTodo = this.deleteTodo.bind(this);
     this.setFilter = this.setFilter.bind(this);
+    this.toggleTodo = this.toggleTodo.bind(this);
     this.state = {
       todos: [
-        { desc: 'Clean the garage', status: 'open' },
-        { desc: 'Do the taxes', status: 'open' },
-        { desc: 'Take a nap', status: 'complete'},
+        { desc: 'Clean the garage', complete: false },
+        { desc: 'Do the taxes', complete: false },
+        { desc: 'Take a nap', complete: true},
       ],
       filter: 'all', // open, all, or complete
     };
@@ -21,6 +23,20 @@ class App extends Component {
 
   setFilter(filter) {
     this.setState({ filter });
+  }
+
+  toggleTodo(index) {
+    console.log('toggle');
+    const todos = this.state.todos.slice(); // copy the array to avoid mutating state directly
+    todos[index].complete = !todos[index].complete; // change complete status of target todo
+    this.setState({ todos });
+  }
+
+  deleteTodo(index) {
+    console.log('delete');
+    const todos = this.state.todos.slice(); // copy the array to avoid mutating state directly
+    todos.splice(index, 1); // remove the item from todos
+    this.setState({ todos });
   }
 
   render() {
@@ -32,8 +48,16 @@ class App extends Component {
           <h2>Barebones Todo - Thinking in React</h2>
         </div>
         <AddTodo />
-        <TodoList filter={filter} todos={todos} />
-        <Filter filter={filter} setFilter={this.setFilter} />
+        <TodoList
+          filter={filter}
+          todos={todos}
+          toggleTodo={this.toggleTodo}
+          deleteTodo={this.deleteTodo}
+        />
+        <Filter
+          filter={filter}
+          setFilter={this.setFilter}
+        />
       </div>
     );
   }

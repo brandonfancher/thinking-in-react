@@ -6,14 +6,24 @@ import './styles/TodoList.css';
 
 class Todo extends Component {
   render() {
-    const todo = this.props.todo;
+    const { deleteTodo, hidden, index, todo, toggleTodo } = this.props;
 
     return (
-      <div className="Todo">
-        <p className={`Todo-text Todo-${todo.status}`}>{todo.desc}</p>
+      <div className="Todo" style={hidden ? { display: 'none' } : null}>
+        <p className={`Todo-text Todo-${todo.complete ? 'complete' : 'open'}`}>{todo.desc}</p>
         <div className="Todo-buttons">
-          <img src={todo.status === 'complete' ? undo : complete} className="Todo-button" alt="status-action" />
-          <img src={del} className="Todo-button" alt="del" />
+          <img
+            src={todo.complete ? undo : complete}
+            className="Todo-button"
+            alt="status-action"
+            onClick={() => toggleTodo(index)}
+          />
+          <img
+            src={del}
+            className="Todo-button"
+            alt="del"
+            onClick={() => deleteTodo(index)}
+          />
         </div>
       </div>
     );

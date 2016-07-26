@@ -3,19 +3,33 @@ import Todo from './Todo.js';
 import './styles/TodoList.css';
 
 class TodoList extends Component {
+
+  filterOut(todo) {
+    const filter = this.props.filter;
+    if (filter === 'open' && todo.complete) {
+      return true;
+    } else if (filter === 'complete' && !todo.complete) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const { filter, todos } = this.props;
+    const { deleteTodo, todos, toggleTodo } = this.props;
 
     return (
       <div className="TodoList">
         {todos
-          .filter(todo => {
-            if (filter !== 'all') {
-              return todo.status === filter;
-            }
-            return todo;
-          })
-          .map((todo, index) => <Todo todo={todo} key={`todo-${index}`} />)}
+          .map((todo, index) => (
+            <Todo
+              key={`todo-${index}`}
+              hidden={this.filterOut(todo)}
+              index={index}
+              todo={todo}
+              deleteTodo={deleteTodo}
+              toggleTodo={toggleTodo}
+            />
+          ))}
       </div>
     );
   }
