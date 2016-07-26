@@ -5,17 +5,21 @@ import TodoList from './TodoList';
 import logo from './images/logo.svg';
 import './styles/App.css';
 
-const mockState = {
-  todos: [
-    { desc: 'Clean the garage', status: 'open' },
-    { desc: 'Do the taxes', status: 'open' },
-    { desc: 'Take a nap', status: 'complete'},
-  ],
-  filter: 'all', // open, all, or complete
-}
-
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [
+        { desc: 'Clean the garage', status: 'open' },
+        { desc: 'Do the taxes', status: 'open' },
+        { desc: 'Take a nap', status: 'complete'},
+      ],
+      filter: 'all', // open, all, or complete
+    };
+  }
+
   render() {
+    const { todos, filter } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -23,8 +27,8 @@ class App extends Component {
           <h2>Barebones Todo - Thinking in React</h2>
         </div>
         <AddTodo />
-        <TodoList todos={mockState.todos} />
-        <Filter filter={mockState.filter} />
+        <TodoList todos={todos} />
+        <Filter filter={filter} />
       </div>
     );
   }
