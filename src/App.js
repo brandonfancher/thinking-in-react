@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import AddTodo from './AddTodo';
+import Filter from './Filter';
+import TodoList from './TodoList';
+import logo from './images/logo.svg';
+import './styles/App.css';
+
+const mockState = {
+  todos: [
+    { desc: 'Clean the garage', status: 'open' },
+    { desc: 'Do the taxes', status: 'open' },
+    { desc: 'Take a nap', status: 'complete'},
+  ],
+  filter: 'all', // open, all, or complete
+}
 
 class App extends Component {
   render() {
@@ -8,11 +20,11 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React!</h2>
+          <h2>Barebones Todo - Thinking in React</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <AddTodo />
+        <TodoList todos={mockState.todos} />
+        <Filter filter={mockState.filter} />
       </div>
     );
   }

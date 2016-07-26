@@ -1,0 +1,29 @@
+.TodoList {
+  border: 3px solid #FF69B4;
+  margin: 4px;
+}
+
+.Todo {
+  border: 3px solid #25E8F2;
+  display: flex;
+  font-size: 18px;
+  margin: 4px;
+}
+
+.Todo-text {
+  flex: 1;
+}
+
+.Todo-buttons {
+  /*flex: 1;*/
+}
+
+.Todo-button {
+  height: 36px;
+  width: 36px;
+  margin: 8px;
+}
+
+.Todo-complete {
+  text-decoration: line-through;
+}
