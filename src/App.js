@@ -8,6 +8,7 @@ import './styles/App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.addTodo = this.addTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.toggleTodo = this.toggleTodo.bind(this);
@@ -25,15 +26,19 @@ class App extends Component {
     this.setState({ filter });
   }
 
+  addTodo(desc) {
+    const todos = this.state.todos;
+    const newTodo = { desc, complete: false };
+    this.setState({ todos: [...todos, newTodo] })
+  }
+
   toggleTodo(index) {
-    console.log('toggle');
     const todos = this.state.todos.slice(); // copy the array to avoid mutating state directly
     todos[index].complete = !todos[index].complete; // change complete status of target todo
     this.setState({ todos });
   }
 
   deleteTodo(index) {
-    console.log('delete');
     const todos = this.state.todos.slice(); // copy the array to avoid mutating state directly
     todos.splice(index, 1); // remove the item from todos
     this.setState({ todos });
@@ -47,7 +52,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Barebones Todo - Thinking in React</h2>
         </div>
-        <AddTodo />
+        <AddTodo addTodo={this.addTodo} />
         <TodoList
           filter={filter}
           todos={todos}
